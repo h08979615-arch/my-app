@@ -3,11 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>يصير ونص! ⚔️💬</title>
+    <title>قصف جبهات - GAME MODE 🎮</title>
     <style>
+        :root {
+            --ps-blue: #00439c;
+            --xbox-green: #107c10;
+            --neon-glow: #00f0ff;
+            --bg-dark: #0a0f18;
+            --card-bg: #131c2e;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0b141a;
+            background: radial-gradient(circle at center, #1a2639 0%, var(--bg-dark) 100%);
             color: #ffffff;
             display: flex;
             flex-direction: column;
@@ -15,171 +23,76 @@
             justify-content: flex-start;
             min-height: 100vh;
             margin: 0;
-            padding: 10px;
+            padding: 15px;
             box-sizing: border-box;
         }
-        h1 {
-            color: #2ed573;
-            font-size: 24px;
-            margin: 15px 0;
+
+        /* حاوية اللعبة على ستايل الكونسول */
+        .console-container {
+            width: 100%;
+            max-width: 420px;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            box-sizing: border-box;
+            box-shadow: 0 0 30px rgba(0, 67, 156, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.05);
+            border: 2px solid #1f2d44;
             text-align: center;
         }
-        .game-container {
-            width: 100%;
-            max-width: 400px;
+
+        /* الـ Header المستوحى من الـ Gaming */
+        .console-header {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #1f2d44;
+            padding-bottom: 10px;
         }
-        .chat-box {
-            background-color: #1f2c34;
-            padding: 15px;
-            border-radius: 10px;
-            min-height: 60px;
-            font-size: 18px;
+
+        .console-title {
+            font-size: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #00f0ff, #00439c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+        }
+
+        .console-badge {
+            background-color: var(--xbox-green);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
             font-weight: bold;
-            text-align: right;
-            border-right: 5px solid #2ed573;
+            box-shadow: 0 0 10px rgba(16, 124, 16, 0.5);
         }
+
+        /* شاشة عرض القصف (تلفزيون الألعاب) */
+        .screen-display {
+            background: linear-gradient(145deg, #070d14, #0f1724);
+            border: 2px solid #00f0ff;
+            padding: 20px;
+            border-radius: 12px;
+            min-height: 70px;
+            font-size: 17px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+            color: #e2e8f0;
+            line-height: 1.5;
+        }
+
+        /* مجموعة الإدخال والكتابة */
         .input-group {
             display: flex;
             gap: 8px;
+            margin-bottom: 20px;
         }
-        input[type="text"] {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            background-color: #202c33;
-            color: #fff;
-            font-size: 16px;
-            outline: none;
-            text-align: right;
-        }
-        button.send-btn {
-            background-color: #00a884;
-            color: white;
-            border: none;
-            padding: 12px 18px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .word-btn {
-            background-color: #202c33;
-            color: #e9edef;
-            border: none;
-            padding: 15px 5px;
-            font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            text-align: center;
-        }
-        .word-btn:active {
-            background-color: #00a884;
-        }
-    </style>
-</head>
-<body>
 
-<div class="game-container">
-    <h1>⚔️💬 يصير ونص!</h1>
-    
-    <div class="chat-box" id="botResponse">
-        اللعبة: قول كلمة أو اضغط على زر!
-    </div>
-
-    <!-- خانة الكتابة الجديدة -->
-    <div class="input-group">
-        <input type="text" id="userInput" placeholder="اكتب كلمة من عندك هنا...">
-        <button class="send-btn" onclick="sendWord()">إرسال</button>
-    </div>
-
-    <!-- الأزرار القديمة مالتك حتى ما تضيع -->
-    <div class="grid-container">
-        <button class="word-btn" onclick="pressButton('مربع')">مربع</button>
-        <button class="word-btn" onclick="pressButton('بيت')">بيت</button>
-        <button class="word-btn" onclick="pressButton('عدل')">عدل</button>
-        
-        <button class="word-btn" onclick="pressButton('مبهذل')">مبهذل</button>
-        <button class="word-btn" onclick="pressButton('مصفح')">مصفح</button>
-        <button class="word-btn" onclick="pressButton('مدعبل')">مدعبل</button>
-        
-        <button class="word-btn" onclick="pressButton('نار')">نار</button>
-        <button class="word-btn" onclick="pressButton('طاسة')">طاسة</button>
-        <button class="word-btn" onclick="pressButton('شحن')">شحن</button>
-        
-        <button class="word-btn" onclick="pressButton('صينية')">صينية</button>
-        <button class="word-btn" onclick="pressButton('تاير')">تاير</button>
-        <button class="word-btn" onclick="pressButton('قوري')">قوري</button>
-        
-        <button class="word-btn" onclick="pressButton('صوبة')">صوبة</button>
-        <button class="word-btn" onclick="pressButton('ماعون')">ماعون</button>
-        <button class="word-btn" onclick="pressButton('قفل')">قفل</button>
-    </div>
-</div>
-
-<script>
-// ردود الجبهات الجاهزة للكلمات
-const responses = {
-    "مربع": "اللعبة: جبهتك صايرة مربع ومحيطها صفر! 📐💥",
-    "بيت": "اللعبة: عبالي قصر! لو تشتريلك عقل وتطلع من بيتكم مو أحسن؟ 🏠💀",
-    "عدل": "اللعبة: سوي حظك عدل بالأول بعدين احچي! 😂",
-    "مبهذل": "اللعبة: المبهذل مبهذل لو يلبس ذهب، وجبهتك أكبر دليل! 👕💨",
-    "مصفح": "اللعبة: وجهك مصفح ما يفيد بيه حتى الصبغ! 🚗🛡️",
-    "مدعبل": "اللعبة: جبهتك مدعبلة ودحرجت لآخر الشارع! 🔴😂",
-    "نار": "اللعبة: جبهتك احترقت وصارت رماد! 🔥💀",
-    "طاسة": "اللعبة: طاسة وترقع بطاسة، ووجهك ماله عوافة! 🥣💥",
-    "شحن": "اللعبة: موبايلك شحنه مخلص وفكرك هم مخلص! 🔋🔌",
-    "صينية": "اللعبة: وجهك صينية ومفتوح للخطار! 🍽️🤣",
-    "تاير": "اللعبة: جبهتك بنشرت وباقية على السيم! 🛞💨",
-    "قوري": "اللعبة: قوري وبلا يدة، كلامك ماله فايدة! 🫖💀",
-    "صوبة": "اللعبة: صوبة ومطافية، روح تدفى بعيد! 🪵🔥",
-    "ماعون": "اللعبة: ماعون مكسور وما يلم حچيك الماصخ! 🍽️💥",
-    "قفل": "اللعبة: مخك قفل ومفتاحه ضاع بالبحر! 🔒🌊"
-};
-
-const randomGhabahat = [
-    "اللعبة: قصف عشوائي! جبهتك طارت لغير قارة 🚀💨",
-    "اللعبة: لو تجمع حچيك هذا كله وتبيعه ما يجيب ربع دينار! 😂",
-    "اللعبة: الكلام ببلاش، بس جبهتك هسة طارت! 💥"
-];
-
-function processResponse(word) {
-    const responseBox = document.getElementById('botResponse');
-    if (responses[word]) {
-        responseBox.innerText = responses[word];
-    } else {
-        const randomIndex = Math.floor(Math.random() * randomGhabahat.length);
-        responseBox.innerText = randomGhabahat[randomIndex];
-    }
-}
-
-function sendWord() {
-    const inputField = document.getElementById('userInput');
-    const word = inputField.value.trim();
-    if (word === "") return;
-    processResponse(word);
-    inputField.value = "";
-}
-
-function pressButton(word) {
-    processResponse(word);
-}
-
-document.getElementById('userInput').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        sendWord();
-    }
-});
-</script>
-
-</body>
-</html>
+        input
