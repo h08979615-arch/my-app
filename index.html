@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -7,11 +6,13 @@
     <title>يصير ونص! 🎮⚔️</title>
     <style>
         :root {
-            --primary: #00a884;
-            --bg-dark: #0b141a;
-            --panel-bg: #111b21;
-            --btn-bg: #202c33;
-            --btn-hover: #2a3942;
+            --ps-blue: #00439c;
+            --xbox-green: #107c10;
+            --neon-glow: #00f0ff;
+            --bg-dark: #0a0f18;
+            --card-bg: #131c2e;
+            --btn-bg: #1c293d;
+            --btn-hover: #273b54;
             --text-light: #e9edef;
             --text-muted: #8696a0;
             --danger: #ea0038;
@@ -24,7 +25,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
+            background: radial-gradient(circle at center, #1a2639 0%, var(--bg-dark) 100%);
             color: var(--text-light);
             margin: 0;
             display: flex;
@@ -35,14 +36,14 @@
             overflow: hidden;
         }
 
-        /* حاوية الشاشات المشتركة */
+        /* حاوية الشاشات المشتركة على ستايل الكونسول */
         .screen {
             width: 100%;
-            max-width: 450px;
-            height: 100%;
+            max-width: 430px;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            padding: 20px;
+            padding: 25px;
             box-sizing: border-box;
             justify-content: center;
             animation: fadeIn 0.2s ease-in-out;
@@ -58,22 +59,41 @@
         }
 
         /* 1. الشاشة الرئيسية (MainMenu) */
-        .menu-title {
+        .console-container {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(0, 67, 156, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.05);
+            border: 2px solid #1f2d44;
             text-align: center;
-            margin-bottom: 40px;
+            width: 100%;
         }
 
-        .menu-title h1 {
-            font-size: 42px;
-            color: var(--primary);
-            margin: 0;
-            text-shadow: 0 0 15px rgba(0, 168, 132, 0.3);
+        .console-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #1f2d44;
+            padding-bottom: 10px;
         }
 
-        .menu-title p {
-            color: var(--text-muted);
-            margin-top: 10px;
-            font-size: 16px;
+        .console-title {
+            font-size: 22px;
+            font-weight: 900;
+            background: linear-gradient(90deg, #00f0ff, #00439c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+        }
+
+        .console-badge {
+            background-color: var(--xbox-green);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(16, 124, 16, 0.5);
         }
 
         .menu-buttons {
@@ -84,11 +104,11 @@
         }
 
         .menu-btn {
-            background-color: var(--btn-bg);
+            background: linear-gradient(135deg, #1c293d, #141f30);
             color: var(--text-light);
-            border: 2px solid #222e35;
+            border: 1px solid #273b54;
             padding: 18px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             border-radius: 12px;
             cursor: pointer;
@@ -97,21 +117,23 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
         .menu-btn:active {
             transform: scale(0.97);
-            background-color: var(--primary);
-            border-color: var(--primary);
+            background: linear-gradient(135deg, #00439c, #00f0ff);
+            border-color: #00f0ff;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
         }
 
         .menu-btn.exit {
-            border-color: #3b161e;
+            border-color: #501924;
         }
         .menu-btn.exit:active {
-            background-color: var(--danger);
+            background: var(--danger);
             border-color: var(--danger);
+            box-shadow: 0 0 15px rgba(234, 0, 56, 0.4);
         }
 
         /* 2. شاشة اللعب (Gameplay) */
@@ -119,24 +141,26 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #222e35;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #1f2d44;
             margin-bottom: 15px;
         }
 
         .back-btn {
             background: none;
             border: none;
-            color: var(--primary);
+            color: var(--neon-glow);
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
+            text-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
         }
 
+        /* تلفزيون الشات والألعاب المطور */
         .chat-display {
             flex: 1;
-            background-color: #0b141a;
-            border: 1px solid #222e35;
+            background: linear-gradient(145deg, #070d14, #0f1724);
+            border: 2px solid #00f0ff;
             border-radius: 15px;
             padding: 15px;
             overflow-y: auto;
@@ -144,29 +168,32 @@
             flex-direction: column;
             gap: 12px;
             margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
         }
 
         .msg-bubble {
             max-width: 85%;
             padding: 12px 16px;
             border-radius: 14px;
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.4;
-            font-weight: 500;
+            font-weight: bold;
         }
 
         .msg-bot {
-            background-color: var(--btn-bg);
+            background-color: #1f2c34;
             color: var(--text-light);
             align-self: flex-start;
             border-top-right-radius: 0;
+            border-left: 4px solid var(--neon-glow);
         }
 
         .msg-user {
-            background-color: #005c4b;
+            background-color: #00439c;
             color: var(--text-light);
             align-self: flex-end;
             border-top-left-radius: 0;
+            border-right: 4px solid var(--neon-glow);
         }
 
         .input-area {
@@ -177,59 +204,79 @@
 
         .input-area input {
             flex: 1;
-            background-color: var(--panel-bg);
-            border: 1px solid #222e35;
+            background-color: #070d14;
+            border: 2px solid #1f2d44;
             padding: 14px;
             border-radius: 10px;
             color: white;
-            font-size: 16px;
+            font-size: 15px;
             outline: none;
+            text-align: right;
+            transition: all 0.3s ease;
         }
 
-        .input-area button {
-            background-color: var(--primary);
+        .input-area input:focus {
+            border-color: var(--neon-glow);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        .btn-action {
+            background: linear-gradient(135deg, #00f0ff, #00439c);
             color: white;
             border: none;
-            padding: 0 20px;
-            border-radius: 10px;
+            padding: 0 22px;
+            font-size: 15px;
             font-weight: bold;
+            border-radius: 10px;
             cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 67, 156, 0.4);
         }
 
+        .btn-action:active {
+            transform: scale(0.95);
+        }
+
+        /* شبكة الأزرار على شكل ألعاب */
         .words-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            max-height: 200px;
+            gap: 10px;
+            max-height: 220px;
             overflow-y: auto;
-            background-color: var(--panel-bg);
-            padding: 10px;
-            border-radius: 12px;
+            background-color: #070d14;
+            padding: 12px;
+            border-radius: 15px;
+            border: 1px solid #1f2d44;
         }
 
         .grid-word-btn {
-            background-color: var(--btn-bg);
-            color: white;
-            border: none;
+            background: linear-gradient(135deg, #1c293d, #141f30);
+            color: #cbd5e1;
+            border: 1px solid #273b54;
             padding: 12px 5px;
             font-size: 14px;
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
             text-align: center;
+            transition: all 0.2s;
         }
 
         .grid-word-btn:active {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, #00439c, #00f0ff);
+            color: #ffffff;
+            border-color: #00f0ff;
+            transform: scale(0.95);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
         }
 
         /* 3. شاشة الإعدادات (Settings) */
         .settings-box {
-            background-color: var(--panel-bg);
-            border-radius: 15px;
-            padding: 20px;
-            border: 1px solid #222e35;
-            margin-bottom: 20px;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            border: 2px solid #1f2d44;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
         }
 
         .setting-item {
@@ -237,6 +284,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            font-weight: bold;
         }
 
         .switch {
@@ -252,7 +300,7 @@
             position: absolute;
             cursor: pointer;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #334046;
+            background-color: #273b54;
             transition: .3s;
             border-radius: 34px;
         }
@@ -267,54 +315,74 @@
             border-radius: 50%;
         }
 
-        input:checked + .slider { background-color: var(--primary); }
+        input:checked + .slider { background-color: var(--xbox-green); box-shadow: 0 0 10px rgba(16, 124, 16, 0.5); }
         input:checked + .slider:before { transform: translateX(24px); }
 
-        /* ميزة إضافة قصف مخصص */
         .add-custom-qasf {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin-top: 20px;
-            border-top: 1px solid #222e35;
+            margin-top: 25px;
+            border-top: 2px solid #1f2d44;
             padding-top: 15px;
         }
 
         .add-custom-qasf input {
-            background-color: #1a242b;
-            border: 1px solid #222e35;
-            padding: 10px;
+            background-color: #070d14;
+            border: 1px solid #273b54;
+            padding: 12px;
             border-radius: 8px;
             color: white;
             outline: none;
+            text-align: right;
+        }
+
+        .add-custom-qasf input:focus {
+            border-color: var(--neon-glow);
         }
 
         .add-custom-qasf button {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, #107c10, #0b500b);
             color: white;
             border: none;
-            padding: 10px;
+            padding: 12px;
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
+            box-shadow: 0 4px 10px rgba(16, 124, 16, 0.3);
         }
 
         /* 4. شاشة الخروج (ExitScreen) */
         .exit-content {
             text-align: center;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid #501924;
+            box-shadow: 0 0 25px rgba(234, 0, 56, 0.15);
         }
 
         .exit-content h2 {
             font-size: 32px;
             color: var(--danger);
-            margin-bottom: 15px;
+            margin: 0 0 15px 0;
+            text-shadow: 0 0 10px rgba(234, 0, 56, 0.3);
         }
 
         .exit-content p {
-            font-size: 18px;
+            font-size: 17px;
             color: var(--text-light);
             margin-bottom: 30px;
-            line-height: 1.5;
+            line-height: 1.6;
+        }
+
+        .footer-branding {
+            margin-top: 15px;
+            font-size: 11px;
+            color: #4a5d78;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
         }
     </style>
 </head>
@@ -322,14 +390,21 @@
 
     <!-- 1. الشاشة الرئيسية (MainMenu) -->
     <div class="screen" id="mainMenu">
-        <div class="menu-title">
-            <h1>يصير ونص! 💬⚔️</h1>
-            <p>نسخة القائمة الرئيسية التفاعلية</p>
-        </div>
-        <div class="menu-buttons">
-            <button class="menu-btn" onclick="showScreen('gameplay')">🎮 ابدأ اللعب (Play)</button>
-            <button class="menu-btn" onclick="showScreen('settings')">⚙️ الإعدادات (Settings)</button>
-            <button class="menu-btn exit" onclick="showScreen('exitScreen')">🚪 خروج (Exit)</button>
+        <div class="console-container">
+            <div class="console-header">
+                <div class="console-title">🎮 يصير ونص! OS</div>
+                <div class="console-badge">ONLINE</div>
+            </div>
+            <div class="menu-buttons">
+                <button class="menu-btn" onclick="showScreen('gameplay')">▶ ابدأ اللعب (Play)</button>
+                <button class="menu-btn" onclick="showScreen('settings')">⚙️ الإعدادات (Settings)</button>
+                <button class="menu-btn exit" onclick="showScreen('exitScreen')">🚪 خروج (Exit)</button>
+            </div>
+            <div class="footer-branding">
+                <span>PS5 UI v3.0</span>
+                <span>•</span>
+                <span>XBOX LIVE</span>
+            </div>
         </div>
     </div>
 
@@ -337,20 +412,20 @@
     <div class="screen hidden" id="gameplay">
         <div class="game-header">
             <button class="back-btn" onclick="showScreen('mainMenu')">◀ القائمة الرئيسية</button>
-            <span style="font-weight: bold; color: var(--primary);">ساحة القصف ⚔️</span>
+            <span style="font-weight: 900; color: var(--neon-glow); text-shadow: 0 0 8px rgba(0, 240, 255, 0.3);">ساحة القصف ⚔️</span>
         </div>
         
         <div class="chat-display" id="chatBox">
-            <div class="msg-bubble msg-bot">اكتب كلمة بالخانة جوة، أو اضغط على أحد الأزرار حتى يطير القصف تلقائياً! 👇💥</div>
+            <div class="msg-bubble msg-bot">[ SYSTEM ] اكتب كلمة بالخانة جوة، أو اضغط على أزرار التحكم لتشغيل القصف التلقائي! 💥</div>
         </div>
 
         <div class="input-area">
-            <input type="text" id="userInput" placeholder="اكتب كلمة مثل: بيت...">
-            <button onclick="sendCustomWord()">إرسال</button>
+            <input type="text" id="userInput" placeholder="اكتب كلمة من اختيارك...">
+            <button class="btn-action" onclick="sendCustomWord()">إرسال</button>
         </div>
 
         <div class="words-grid" id="wordsGrid">
-            <!-- الأزرار تولد تلقائياً من الجافاسكريبت لتسهيل التعديل -->
+            <!-- الأزرار تتولد تلقائياً هنا -->
         </div>
     </div>
 
@@ -358,31 +433,24 @@
     <div class="screen hidden" id="settings">
         <div class="game-header">
             <button class="back-btn" onclick="showScreen('mainMenu')">◀ رجوع</button>
-            <span style="font-weight: bold; color: var(--primary);">الإعدادات</span>
+            <span style="font-weight: bold; color: var(--xbox-green);">نظام الإعدادات</span>
         </div>
 
         <div class="settings-box">
             <div class="setting-item">
-                <span>تأثيرات الصوت الهزازة 📳</span>
+                <span>تأثيرات الاهتزاز (Haptic) 📳</span>
                 <label class="switch">
                     <input type="checkbox" id="hapticToggle" checked>
                     <span class="slider"></span>
                 </label>
             </div>
-            <div class="setting-item">
-                <span>المؤثرات الصوتية 🔊</span>
-                <label class="switch">
-                    <input type="checkbox" id="soundToggle" checked>
-                    <span class="slider"></span>
-                </label>
-            </div>
 
-            <!-- ميزة إضافة كلمة وقصف خاص باللاعب ومستمر حتى لو أغلق اللعبة -->
+            <!-- ميزة إضافة كلمة وقصف خاص باللاعب ومستمر -->
             <div class="add-custom-qasf">
-                <span style="font-weight: bold; font-size: 14px; color: var(--primary);">إضافة كلمة وقصف خاص بيك ➕</span>
-                <input type="text" id="customWord" placeholder="الكلمة (مثال: تفاحة)">
+                <span style="font-weight: bold; font-size: 14px; color: var(--neon-glow);">إضافة كلمة وقصف مخصص بيك ➕</span>
+                <input type="text" id="customWord" placeholder="الكلمة (مثال: بيت)">
                 <input type="text" id="customReply" placeholder="الرد المزلزل مالتك...">
-                <button onclick="addNewCustomQasf()">حفظ الكلمة باللعبة</button>
+                <button onclick="addNewCustomQasf()">حفظ الكلمة بالنظام</button>
             </div>
         </div>
     </div>
@@ -391,9 +459,9 @@
     <div class="screen hidden" id="exitScreen">
         <div class="exit-content">
             <h2>وين شارد؟ 🏃‍♂️💀</h2>
-            <p>تريد تطلع وتعوف اللعبة؟ ما تطلع منا إلا تنجبر تاكل قصفة أخيرة ومعدلة تليق بجبهتك! 😂💥</p>
-            <button class="menu-btn" style="width: 100%; margin-bottom: 12px;" onclick="showScreen('gameplay')">🤦‍♂️ تراجعت، رجعني ألعب</button>
-            <button class="menu-btn exit" style="width: 100%;" onclick="showScreen('mainMenu')">🚪 اطلع كوة (القائمة الرئيسية)</button>
+            <p>تريد تطلع وتنهي اللعبة؟ ما تطلع منا إلا تنجبر تاكل قصفة أخيرة ومعدلة تليق بجبهتك الطايرة! 😂💥</p>
+            <button class="menu-btn" style="width: 100%; margin-bottom: 12px; background: #1c293d;" onclick="showScreen('gameplay')">🤦‍♂️ تراجعت، رجعني ألعب</button>
+            <button class="menu-btn exit" style="width: 100%;" onclick="showScreen('mainMenu')">🚪 اطلع كوة (القائمة)</button>
         </div>
     </div>
 
@@ -418,9 +486,9 @@
         };
 
         const randomGhabahat = [
-            "قصف عشوائي! جبهتك طارت لغير قارة 🚀💨",
-            "لو تجمع حچيك هذا كله وتبيعه ما يجيب ربع دينار! 😂",
-            "الكلام ببلاش، بس جبهتك هسة طارت بالجو! 💥"
+            "CRITICAL HIT: قصف عشوائي! جبهتك طارت لغير قارة 🚀💨",
+            "FATALITY: لو تجمع حچيك هذا كله وتبيعه ما يجيب ربع دينار! 😂",
+            "GAME OVER: الكلام ببلاش، بس جبهتك هسة طارت بالجو! 💥"
         ];
 
         // لود الكلمات المخصصة من التخزين المحلي للموبايل إن وجدت
@@ -439,11 +507,11 @@
 
             // تشغيل هز خفيف إذا مفعل بالإعدادات
             if (document.getElementById('hapticToggle').checked && window.navigator.vibrate) {
-                window.navigator.vibrate(50);
+                window.navigator.vibrate(40);
             }
         }
 
-        // بناء قائمة الأزرار بشكل تلقائي لسهولة الضغط
+        // بناء قائمة الأزرار بشكل تلقائي
         function buildWordsGrid() {
             const grid = document.getElementById('wordsGrid');
             grid.innerHTML = "";
@@ -469,24 +537,26 @@
 
             // اهتزاز الموبايل عند القصف
             if (document.getElementById('hapticToggle').checked && window.navigator.vibrate) {
-                window.navigator.vibrate([100, 50, 100]);
+                window.navigator.vibrate([80, 40, 80]);
             }
 
-            // رد اللعبة بقصف الجبهة ورا ثانية واحدة
+            // رد اللعبة بقصف الجبهة
             setTimeout(() => {
                 const botBubble = document.createElement('div');
                 botBubble.className = "msg-bubble msg-bot";
                 
                 if (qasfDatabase[word]) {
-                    botBubble.innerText = "اللعبة: " + qasfDatabase[word];
+                    botBubble.innerText = "SYSTEM: " + qasfDatabase[word];
+                } else if (qasfDatabase[word.toLowerCase()]) {
+                     botBubble.innerText = "SYSTEM: " + qasfDatabase[word.toLowerCase()];
                 } else {
                     const randomIndex = Math.floor(Math.random() * randomGhabahat.length);
-                    botBubble.innerText = "اللعبة: " + randomGhabahat[randomIndex];
+                    botBubble.innerText = randomGhabahat[randomIndex];
                 }
 
                 chatBox.appendChild(botBubble);
                 chatBox.scrollTop = chatBox.scrollHeight;
-            }, 800);
+            }, 500);
         }
 
         // إرسال الكلمات المكتوبة بالخانة
@@ -510,16 +580,15 @@
                 return;
             }
 
-            // تحديث اللستة وحفظها محلياً
             qasfDatabase[word] = reply;
             const saved = localStorage.getItem('customQasfs') ? JSON.parse(localStorage.getItem('customQasfs')) : {};
             saved[word] = reply;
             localStorage.setItem('customQasfs', JSON.stringify(saved));
 
-            alert(`تم حفظ الكلمة "${word}" بنجاح في نظام اللعبة!`);
+            alert(`تم حفظ الكلمة "${word}" بنجاح في النظام!`);
             wordInput.value = "";
             replyInput.value = "";
-            buildWordsGrid(); // إعادة بناء الأزرار لتشمل الكلمة الجديدة
+            buildWordsGrid();
         }
 
         // تشغيل الإرسال بالإنتر
@@ -529,7 +598,7 @@
             }
         });
 
-        // التهيئة عند تشغيل اللعبة لأول مرة
+        // التهيئة عند تشغيل اللعبة
         window.onload = () => {
             loadCustomQasfs();
             buildWordsGrid();
@@ -537,5 +606,3 @@
     </script>
 </body>
 </html>
-
-```
