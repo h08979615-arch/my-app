@@ -95,4 +95,183 @@
             margin-bottom: 20px;
         }
 
-        input
+        input[type="text"] {
+            flex: 1;
+            padding: 14px;
+            border: 2px solid #1f2d44;
+            border-radius: 10px;
+            background-color: #070d14;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            text-align: right;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--neon-glow);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        .btn-action {
+            background: linear-gradient(135deg, #00f0ff, #00439c);
+            color: white;
+            border: none;
+            padding: 0 22px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 67, 156, 0.4);
+            transition: transform 0.1s ease;
+        }
+
+        .btn-action:active {
+            transform: scale(0.95);
+        }
+
+        /* قائمة الأزرار على شكل مكتبة ألعاب (Grid) */
+        .games-menu {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        /* تصميم زر الكلمة كأنه لعبة كونسول */
+        .game-slot {
+            background: linear-gradient(135deg, #1c293d, #141f30);
+            color: #cbd5e1;
+            border: 1px solid #273b54;
+            padding: 14px 5px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* تأثير التحديد والضغط كأنك تلعب بليستيشن */
+        .game-slot:active {
+            background: linear-gradient(135deg, #00439c, #00f0ff);
+            color: #ffffff;
+            border-color: #00f0ff;
+            transform: scale(0.95);
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+        }
+
+        /* علامات إضافية لثيم الـ Controllers */
+        .footer-branding {
+            margin-top: 20px;
+            font-size: 11px;
+            color: #4a5d78;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="console-container">
+    <div class="console-header">
+        <div class="console-title">🎮 PLAYSTATION & XBOX MODE</div>
+        <div class="console-badge">ONLINE</div>
+    </div>
+    
+    <div class="screen-display" id="botResponse">
+        [ جاهز للتشغيل ] قُل كلمة بالخانة أو حدد زر اللعبة وابدأ الهجوم! ⚡
+    </div>
+
+    <div class="input-group">
+        <input type="text" id="userInput" placeholder="ادخل كلمة من اختيارك...">
+        <button class="btn-action" onclick="sendWord()">إرسال</button>
+    </div>
+
+    <div class="games-menu">
+        <button class="game-slot" onclick="pressButton('مربع')">▢ مربع</button>
+        <button class="game-slot" onclick="pressButton('بيت')">⌂ بيت</button>
+        <button class="game-slot" onclick="pressButton('عدل')">⚡ عدل</button>
+        
+        <button class="game-slot" onclick="pressButton('مبهذل')">⚔️ مبهذل</button>
+        <button class="game-slot" onclick="pressButton('mصفح')">🛡️ مصفح</button>
+        <button class="game-slot" onclick="pressButton('مدعبل')">⚪ مدعبل</button>
+        
+        <button class="game-slot" onclick="pressButton('نار')">🔥 نار</button>
+        <button class="game-slot" onclick="pressButton('طاسة')">🥣 طاسة</button>
+        <button class="game-slot" onclick="pressButton('شحن')">🔋 شحن</button>
+        
+        <button class="game-slot" onclick="pressButton('صينية')">🍽️ صينية</button>
+        <button class="game-slot" onclick="pressButton('تاير')">🛞 تاير</button>
+        <button class="game-slot" onclick="pressButton('قوري')">🫖 قوري</button>
+        
+        <button class="game-slot" onclick="pressButton('صوبة')">🪵 صوبة</button>
+        <button class="game-slot" onclick="pressButton('ماعون')">🥣 ماعون</button>
+        <button class="game-slot" onclick="pressButton('قفل')">🔒 قفل</button>
+    </div>
+
+    <div class="footer-branding">
+        <span>PS5 UI v2.0</span>
+        <span>•</span>
+        <span>XBOX LIVE</span>
+    </div>
+</div>
+
+<script>
+// قائمة ردود القصف
+const responses = {
+    "مربع": "SYSTEM: جبهتك صايرة مربع ومحيطها صفر! 📐💥",
+    "بيت": "SYSTEM: عبالي قصر! لو تشتريلك عقل وتطلع من بيتكم مو أحسن؟ 🏠💀",
+    "عدل": "SYSTEM: سوي حظك عدل بالأول بعدين احچي! 😂",
+    "مبهذل": "SYSTEM: المبهذل مبهذل لو يلبس ذهب، وجبهتك أكبر دليل! 👕💨",
+    "mصفح": "SYSTEM: وجهك مصفح ما يفيد بيه حتى الصبغ! 🚗🛡️",
+    "مدعبل": "SYSTEM: جبهتك مدعبلة ودحرجت لآخر الشارع! 🔴😂",
+    "نار": "SYSTEM: جبهتك احترقت وصارت رماد! 🔥💀",
+    "طاسة": "SYSTEM: طاسة وترقع بطاسة، ووجهك ماله عوافة! 🥣💥",
+    "شحن": "SYSTEM: موبايلك شحنه مخلص وفكرك هم مخلص! 🔋🔌",
+    "صينية": "SYSTEM: وجهك صينية ومفتوح للخطار! 🍽️🤣",
+    "تاير": "SYSTEM: جبهتك بنشرت وباقية على السيم! 🛞💨",
+    "قوري": "SYSTEM: قوري وبلا يدة، كلامك ماله فايدة! 🫖💀",
+    "صوبة": "SYSTEM: صوبة ومطافية، روح تدفى بعيد! 🪵🔥",
+    "ماعون": "SYSTEM: ماعون مكسور وما يلم حچيك الماصخ! 🍽️💥",
+    "قفل": "SYSTEM: مخك قفل ومفتاحه ضاع بالبحر! 🔒🌊"
+};
+
+const randomGhabahat = [
+    "CRITICAL HIT: قصف عشوائي! جبهتك طارت لغير قارة 🚀💨",
+    "FATALITY: لو تجمع حچيك هذا كله وتبيعه ما يجيب ربع دينار! 😂",
+    "GAME OVER: الكلام ببلاش، بس جبهتك هسة طارت! 💥"
+];
+
+function processResponse(word) {
+    const responseBox = document.getElementById('botResponse');
+    if (responses[word]) {
+        responseBox.innerText = responses[word];
+    } else {
+        const randomIndex = Math.floor(Math.random() * randomGhabahat.length);
+        responseBox.innerText = randomGhabahat[randomIndex];
+    }
+}
+
+function sendWord() {
+    const inputField = document.getElementById('userInput');
+    const word = inputField.value.trim();
+    if (word === "") return;
+    processResponse(word);
+    inputField.value = "";
+}
+
+function pressButton(word) {
+    processResponse(word);
+}
+
+document.getElementById('userInput').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        sendWord();
+    }
+});
+</script>
+
+</body>
+</html>
